@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { Row, Col, Button } from 'reactstrap';
 import signup from './../../Asset/images/signup-image.webp';
+import './Css.css';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -49,6 +50,12 @@ const Signup = props => {
         if (name === "confirmPassword") setconfirmPassword(value);
         if (name === "name") setName(value);
     };
+
+    const registerHandler = () => {
+        console.log('registerHandler')
+        props.createUser(name, password);
+        props.history.push('/');
+    }
 
     return (
         <Container component="main" maxWidth="md">
@@ -112,7 +119,9 @@ const Signup = props => {
                                 onChange={() => termCondition()}
                             /> I agree all statements in <span style={{ textDecoration: 'underline' }}>Term of services</span>
                             <br /><br />
-                            <Button style={{ backgroundColor: '#6384f9' }} disabled={!term}>Register</Button>
+                            <Button style={{ backgroundColor: '#6384f9' }} disabled={!term}
+                                onClick={() => registerHandler()}
+                            >Register</Button>
 
                         </Col>
                         <Col>
@@ -127,21 +136,24 @@ const Signup = props => {
         </Container>
     );
 };
-// const mapStateToProps = state => {
-//     return {
-//         checkUserExistance: state.userDetails
-//     };
-// };
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         handleSignup: userDetail =>
-//             dispatch({ type: "CREATE_USER", userDetail: userDetail })
-//     };
-// };
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(SignIn);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createUser: (name, password) => {
+            dispatch({
+                type: 'createUser',
+                payload: {
+                    "name": name, "password": password
+                }
+            })
+        },
 
-export default Signup;
+    }
+}
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Signup);
+
+

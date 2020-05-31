@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import WeatherImg from '../../Asset/images/6.webp';
-import WeatherImg1 from '../../Asset/images/10.webp';
-import WeatherImg2 from '../../Asset/images/8.webp';
-import WeatherImg3 from '../../Asset/images/9.webp';
-// import axios from 'axios';
 import './Weather.css';
 
-const img = [{ label: "WeatherImg", value: WeatherImg },
-{ label: "WeatherImg1", value: WeatherImg1 }]
 function Weather() {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [image, setImage] = useState(WeatherImg);
+    const [image, setImage] = useState('image');
     let d = new Date();
     const [date, setDate] = useState(d.toDateString());
 
@@ -40,8 +33,7 @@ function Weather() {
     // }, []); //Pass Array as second argument
 
     return (
-        <div className="container">
-            <img src={image} alt="Notebook" style={{ width: '100%' }} />
+        <div className={`container ${image}`}>
             <div className="content1 ">
                 <Row>
                     <Col>
@@ -50,9 +42,9 @@ function Weather() {
                                 Theme
                     </DropdownToggle>
                             <DropdownMenu>
-                                <DropdownItem onClick={() => handleMenuItemClick(WeatherImg1)}>Image1</DropdownItem>
-                                <DropdownItem onClick={() => handleMenuItemClick(WeatherImg2)}>Image2</DropdownItem>
-                                <DropdownItem onClick={() => handleMenuItemClick(WeatherImg3)}>Image3</DropdownItem>
+                                <DropdownItem onClick={() => handleMenuItemClick('image1')}>Image1</DropdownItem>
+                                <DropdownItem onClick={() => handleMenuItemClick('image2')}>Image2</DropdownItem>
+                                <DropdownItem onClick={() => handleMenuItemClick('image3')}>Image3</DropdownItem>
 
                             </DropdownMenu>
                         </Dropdown>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -8,6 +8,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { Row, Col, Button } from 'reactstrap';
 import signin from './../../Asset/images/signin-image.webp';
+import './Css.css';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -31,16 +32,24 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const SignIn = props => {
+const SignIn = (props) => {
+    // console.log(props.match.params.path)
     const classes = useStyles();
     const [name, setName] = useState('');
-    const [password, setPassword] = useState('')
-    // const handleNavigation = () => {
-    //     setSignup(!checkSignup);
-    // };
+    const [password, setPassword] = useState('');
+    const [check, checkPassword] = useState(false);
+
+    const handlePasswordValidation = () => {
+        console.log('props.loginData', props.loginData)
+        props.loginData.map((val) => {
+            if (val.name === name && val.password === password)
+                props.history.push('./home')
+        });
+    };
+
     const handleTextChange = (event, name) => {
         const value = event.target.value;
-        console.log(value);
+
         if (name === "password") setPassword(value);
         if (name === "name") setName(value);
     };
@@ -89,7 +98,9 @@ const SignIn = props => {
                             <Checkbox
                             /> Rember me
                             <br /><br />
-                            <Button style={{ backgroundColor: '#6384f9' }}>Log in</Button>
+                            <Button style={{ backgroundColor: '#6384f9' }}
+                                onClick={() => handlePasswordValidation()}
+                            >Log in</Button>
                             <br /><br />
                             Or login with
                             <Button style={{ color: 'white', backgroundColor: '#3434ef', margin: '7px', width: '42px' }}><i class="zmdi zmdi-facebook"></i></Button>
@@ -104,11 +115,13 @@ const SignIn = props => {
         </Container>
     );
 };
-// const mapStateToProps = state => {
-//     return {
-//         checkUserExistance: state.userDetails
-//     };
-// };
+
+const mapStateToProps = state => {
+    return {
+        loginData: state.loginData
+    };
+};
+
 // const mapDispatchToProps = dispatch => {
 //     return {
 //         handleSignup: userDetail =>
@@ -116,9 +129,9 @@ const SignIn = props => {
 //     };
 // };
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(SignIn);
+export default connect(
+    mapStateToProps,
+    null
+)(SignIn);
 
-export default withRouter(SignIn);
+

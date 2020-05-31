@@ -13,15 +13,15 @@ import { Provider } from 'react-redux';
 /**
  * import user define Reducer
  */
-// import Reducer from './Reducers/Reducer';
+import Reducer from './Reducers/Reducer';
 
-// /**
-//  * create Store
-//  */
-// const store = createStore(Reducer);
+/**
+ * create Store
+ */
+const store = createStore(Reducer);
 
 /**
  * wrape App component with Provider and give store
  */
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store} > <App /> </Provider>, document.getElementById('root'));
 registerServiceWorker();

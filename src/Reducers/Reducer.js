@@ -3,17 +3,26 @@ import Data from '../Asset/data/data';
 const iState = {
     list: Data,
     loginData: [{ name: 'user', password: '123456', email: 'abc@gmail.com' }],
+    isSignedIn: false
 
 };
 
 const reducer = (state = iState, action) => {
     switch (action.type) {
+        case "signInFun":
+            console.log('action.payload.isSignedIn', action.payload.isSignedIn)
+            return {
+                "loginData": state.loginData,
+                "list": state.list,
+                "isSignedIn": action.payload.isSignedIn
+            }
         case "createUser":
             const n = { "name": action.payload.name, "password": action.payload.password, "email": action.payload.email }
             // console.log([...state.loginData, n], n)
             return {
                 "loginData": [...state.loginData, n],
                 "list": state.list,
+                "isSignedIn": state.isSignedIn
             }
 
         case "searchData":
@@ -28,11 +37,12 @@ const reducer = (state = iState, action) => {
                 })
                 return {
                     "list": filteredData,
-                    "loginData": state.loginData
+                    "loginData": state.loginData,
+                    "isSignedIn": state.isSignedIn
                 }
             }
             else {
-                return { "list": Data, "loginData": state.loginData }
+                return { "list": Data, "loginData": state.loginData, "isSignedIn": state.isSignedIn }
             }
         default:
             return state;

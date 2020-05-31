@@ -3,9 +3,10 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './Home.css';
 import { connect } from "react-redux";
+import { Button } from '@material-ui/core';
 
 
 const Home = (props) => {
@@ -16,12 +17,19 @@ const Home = (props) => {
         setsearchInput(value);
         props.searchData(value)
     }
-
+    const logout = () => {
+        props.signInFun(false);
+        props.history.push('/');
+    }
+    const weather = () => {
+        props.history.push('/weather');
+    }
 
     return (
         <div className="position" >
-            <Link to='/weather'><span style={{ textDecoration: 'underline' }}>Weather</span></Link>&nbsp;&nbsp;&nbsp;
-            <Link to='/'><span style={{ textDecoration: 'underline' }}>Logout</span></Link>
+            {/* <Link to='/weather'><span style={{ textDecoration: 'underline' }}>Weather</span></Link>&nbsp;&nbsp;&nbsp; */}
+            <Button onClick={() => weather()}>Weather</Button>&nbsp;
+            <Button onClick={() => logout()}>Logout</Button>
             <Paper style={{ width: '20%', margin: '15px' }} >
                 <IconButton
                     type="submit"
@@ -88,7 +96,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         searchData: (searchInput) => {
             dispatch({ type: 'searchData', payload: { "searchInput": searchInput } })
-        }
+        },
+        signInFun: (isSignedIn) => {
+            dispatch({
+                type: 'signInFun',
+                payload: {
+                    "isSignedIn": isSignedIn
+                }
+            })
+        },
 
     }
 }

@@ -43,8 +43,10 @@ const SignIn = (props) => {
     const handlePasswordValidation = () => {
 
         props.loginData.map((val) => {
-            if (val.name === name && val.password === password)
+            if (val.name === name && val.password === password) {
+                props.signInFun(true);
                 props.history.push('./home')
+            }
             return null;
         });
     };
@@ -89,7 +91,7 @@ const SignIn = (props) => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-account zmdi-hc-lg"></i>
+                                            <i className="zmdi zmdi-account zmdi-hc-lg"></i>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -103,7 +105,7 @@ const SignIn = (props) => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-lock"></i>
+                                            <i className="zmdi zmdi-lock"></i>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -134,16 +136,22 @@ const mapStateToProps = state => {
     };
 };
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         handleSignup: userDetail =>
-//             dispatch({ type: "CREATE_USER", userDetail: userDetail })
-//     };
-// };
+const mapDispatchToProps = dispatch => {
+    return {
+        signInFun: (isSignedIn) => {
+            dispatch({
+                type: 'signInFun',
+                payload: {
+                    "isSignedIn": isSignedIn
+                }
+            })
+        },
+    };
+};
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(SignIn);
 
 

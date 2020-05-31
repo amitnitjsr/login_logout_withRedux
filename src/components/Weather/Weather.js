@@ -8,9 +8,7 @@ function Weather() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [image, setImage] = useState('image');
     let d = new Date();
-    const [date, setDate] = useState('');
-    setDate(d.toDateString());
-
+    let date1 = d.toDateString();
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
     const handleMenuItemClick = (value) => {
@@ -50,11 +48,10 @@ function Weather() {
                             </DropdownMenu>
                         </Dropdown>
                     </Col>
-                    <Col>{date}</Col>
+                    <Col>{date1}</Col>
                 </Row>
             </div>
             <div className="content">
-
                 <Row>
                     <Col>
                         <h1>4 &#8451;</h1>

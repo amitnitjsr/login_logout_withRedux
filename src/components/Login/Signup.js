@@ -99,7 +99,7 @@ const Signup = props => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-account zmdi-hc-lg"></i>
+                                            <i className="zmdi zmdi-account zmdi-hc-lg"></i>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -112,7 +112,7 @@ const Signup = props => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-email"></i>
+                                            <i className="zmdi zmdi-email"></i>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -126,7 +126,7 @@ const Signup = props => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-lock"></i>
+                                            <i className="zmdi zmdi-lock"></i>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -140,7 +140,7 @@ const Signup = props => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-lock" style={{ color: 'whitesmoke' }}></i>
+                                            <i className="zmdi zmdi-lock" style={{ color: 'whitesmoke' }}></i>
                                         </InputAdornment>
                                     ),
                                 }}

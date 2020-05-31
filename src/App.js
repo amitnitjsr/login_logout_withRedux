@@ -4,6 +4,7 @@ import Signin from './components/Login/Signin';
 import Signup from './components/Login/Signup';
 import Home from './components/Home/Home';
 import Weather from './components/Weather/Weather';
+import { connect } from 'react-redux';
 import './App.css';
 class App extends Component {
   render() {
@@ -12,12 +13,27 @@ class App extends Component {
         <div className="App">
           <Route exact path='/' component={Signin} />
           <Route path='/signup' component={Signup} />
-          <Route path='/home' component={Home} />
-          <Route path='/weather' component={Weather} />
+          {this.props.isSignedIn && (
+            <Route path='/home' component={Home} />
+          )}
+          {this.props.isSignedIn && (
+            <Route path='/weather' component={Weather} />
+          )}
         </div>
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isSignedIn: state.isSignedIn
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(App);
+
+

@@ -38,6 +38,9 @@ const Signup = props => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setconfirmPassword] = useState('');
+    const [psw, setPsw] = useState(true);
+    const [nameVal, setnameVal] = useState(true);
+    const [emailVal, setemailVal] = useState(true);
 
     const termCondition = () => {
         setTerm(!term);
@@ -45,15 +48,39 @@ const Signup = props => {
 
     const handleTextChange = (event, name) => {
         const value = event.target.value;
-        if (name === "email") setEmail(value);
-        if (name === "password") setPassword(value);
-        if (name === "confirmPassword") setconfirmPassword(value);
-        if (name === "name") setName(value);
+
+        if (name === "email") {
+            setEmail(value);
+            if (!value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/))
+                setemailVal(true)
+            else
+                setemailVal(false)
+        }
+        else if (name === "password") {
+            setPassword(value);
+            if (!value || value.trim().length === 0 || value !== confirmPassword)
+                setPsw(true)
+            else
+                setPsw(false)
+        }
+        else if (name === "confirmPassword") {
+            setconfirmPassword(value);
+            if (!value || value.trim().length === 0 || value !== password)
+                setPsw(true)
+            else
+                setPsw(false)
+        }
+        else if (name === "name") {
+            setName(value);
+            if (!value || value.trim().length === 0)
+                setnameVal(true);
+            else
+                setnameVal(false);
+        }
     };
 
     const registerHandler = () => {
-        console.log('registerHandler')
-        props.createUser(name, password);
+        props.createUser(name, password, email);
         props.history.push('/');
     }
 
@@ -67,6 +94,7 @@ const Signup = props => {
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Your Name"
+                                error={nameVal}
                                 onChange={(event) => handleTextChange(event, "name")}
                                 InputProps={{
                                     startAdornment: (
@@ -79,6 +107,7 @@ const Signup = props => {
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Email"
+                                error={emailVal}
                                 onChange={(event) => handleTextChange(event, "email")}
                                 InputProps={{
                                     startAdornment: (
@@ -92,6 +121,7 @@ const Signup = props => {
                                 id="input-with-icon-textfield"
                                 placeholder="Password"
                                 type="password"
+                                error={psw}
                                 onChange={(event) => handleTextChange(event, "password")}
                                 InputProps={{
                                     startAdornment: (
@@ -105,6 +135,7 @@ const Signup = props => {
                                 id="input-with-icon-textfield"
                                 placeholder="Repeat your password"
                                 type="password"
+                                error={psw}
                                 onChange={(event) => handleTextChange(event, "confirmPassword")}
                                 InputProps={{
                                     startAdornment: (
@@ -119,13 +150,14 @@ const Signup = props => {
                                 onChange={() => termCondition()}
                             /> I agree all statements in <span style={{ textDecoration: 'underline' }}>Term of services</span>
                             <br /><br />
-                            <Button style={{ backgroundColor: '#6384f9' }} disabled={!term}
+                            <Button style={{ backgroundColor: '#6384f9' }}
+                                disabled={!term || psw || nameVal || emailVal}
                                 onClick={() => registerHandler()}
                             >Register</Button>
 
                         </Col>
                         <Col>
-                            <img src={signup} alt="no image" /><br />
+                            <img src={signup} alt="signup" /><br />
                             <span style={{ textDecoration: 'underline' }}>I am already member</span>
                         </Col>
                     </Row>
@@ -139,11 +171,11 @@ const Signup = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createUser: (name, password) => {
+        createUser: (name, password, email) => {
             dispatch({
                 type: 'createUser',
                 payload: {
-                    "name": name, "password": password
+                    "name": name, "password": password, "email": email
                 }
             })
         },

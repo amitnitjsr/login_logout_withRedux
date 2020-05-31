@@ -29,17 +29,6 @@
     margin-left: -15px;
   }
 
-  .btn {
-    color: #fff;
-    background-color: transparent;
-    border-color: none;
-}
-.btn:hover {
-  color: #fff;
-  background-color: transparent !important;
-  border-color: none;
-}
-
 .image {
   background-image: url("../../Asset/images/9.webp");
   height: 625px;

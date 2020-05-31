@@ -11,13 +11,12 @@ import { connect } from "react-redux";
 const Home = (props) => {
     const [searchInput, setsearchInput] = useState('');
 
-    const searchHandler = (e) => {
-        setsearchInput(e.target.value);
-        props.searchData(searchInput)
+    const searchHandler = (event) => {
+        const value = event.target.value;
+        setsearchInput(value);
+        props.searchData(value)
     }
-    const searchFunctionCall = () => {
-        console.log('searchFunctionCall')
-    }
+
 
     return (
         <div className="position" >
@@ -32,7 +31,6 @@ const Home = (props) => {
                 </IconButton>
                 <InputBase
                     onChange={(event) => searchHandler(event)}
-                    onEnter={() => searchFunctionCall()}
                     placeholder="Search..."
                     value={searchInput}
                 />
@@ -60,15 +58,15 @@ const Home = (props) => {
                         })
                     }
                 </tbody>
-                <tfoot style={{ backgroundColor: 'blanchedalmond' }}>
+                <tfoot style={{ backgroundColor: '#4CAF50' }}>
                     {
                         props.list.map(d => {
                             return (d.State === "Total" && <tr>
-                                <td>{d.State}</td>
-                                <td>{d.Confirmed}</td>
-                                <td>{d.Active}</td>
-                                <td>{d.Recovered}</td>
-                                <td>{d.Deaths}</td>
+                                <th>{d.State}</th>
+                                <th>{d.Confirmed}</th>
+                                <th>{d.Active}</th>
+                                <th>{d.Recovered}</th>
+                                <th>{d.Deaths}</th>
                             </tr>)
                         })
                     }

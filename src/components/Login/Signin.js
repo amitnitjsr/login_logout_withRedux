@@ -33,45 +33,58 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignIn = (props) => {
-    // console.log(props.match.params.path)
+
     const classes = useStyles();
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
-    const [check, checkPassword] = useState(false);
+    const [nameVal, setNameVal] = useState(true);
+    const [pswVal, setpswVal] = useState(true);
 
     const handlePasswordValidation = () => {
-        console.log('props.loginData', props.loginData)
+
         props.loginData.map((val) => {
             if (val.name === name && val.password === password)
                 props.history.push('./home')
+            return null;
         });
     };
 
     const handleTextChange = (event, name) => {
         const value = event.target.value;
+        if (name === "password") {
+            setPassword(value);
+            if (!value || value.trim().length === 0) {
+                setpswVal(true);
+            }
+            else
+                setpswVal(false);
+        }
+        else if (name === "name") {
+            setName(value);
+            if (!value || value.trim().length === 0) {
+                setNameVal(true)
+            }
+            else
+                setNameVal(false)
+        }
 
-        if (name === "password") setPassword(value);
-        if (name === "name") setName(value);
     };
-
-
 
     return (
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <form className={classes.form}>
                     <Row>
-
                         <Col>
-                            <img src={signin} alt="no image" /><br /><br /><br />
+                            <img src={signin} alt="signin" /><br /><br /><br />
                             <Link to='/signup'><span style={{ textDecoration: 'underline' }}>Create an account</span></Link>
                         </Col>
-
                         <Col>
                             <h1>Sign up</h1>
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Your Name"
+                                error={nameVal}
                                 onChange={(event) => handleTextChange(event, "name")}
                                 InputProps={{
                                     startAdornment: (
@@ -85,6 +98,7 @@ const SignIn = (props) => {
                                 id="input-with-icon-textfield"
                                 type="password"
                                 placeholder="Password"
+                                error={pswVal}
                                 onChange={(event) => handleTextChange(event, "password")}
                                 InputProps={{
                                     startAdornment: (
@@ -94,22 +108,20 @@ const SignIn = (props) => {
                                     ),
                                 }}
                             /><br /><br />
-
                             <Checkbox
                             /> Rember me
                             <br /><br />
                             <Button style={{ backgroundColor: '#6384f9' }}
                                 onClick={() => handlePasswordValidation()}
+                                disabled={nameVal || pswVal}
                             >Log in</Button>
                             <br /><br />
                             Or login with
-                            <Button style={{ color: 'white', backgroundColor: '#3434ef', margin: '7px', width: '42px' }}><i class="zmdi zmdi-facebook"></i></Button>
-                            <Button style={{ color: 'white', backgroundColor: '#389ced', margin: '5px' }}><i class="zmdi zmdi-twitter"></i></Button>
-                            <Button style={{ color: 'white', backgroundColor: '#dd0d4f', margin: '5px' }}><i class="zmdi zmdi-google"></i></Button>
+                            <Button style={{ color: 'white', backgroundColor: '#3434ef', margin: '7px', width: '42px' }}><i className="zmdi zmdi-facebook"></i></Button>
+                            <Button style={{ color: 'white', backgroundColor: '#389ced', margin: '5px' }}><i className="zmdi zmdi-twitter"></i></Button>
+                            <Button className="red"><i className="zmdi zmdi-google"></i></Button>
                         </Col>
                     </Row>
-
-
                 </form>
             </div>
         </Container>

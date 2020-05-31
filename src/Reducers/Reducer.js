@@ -2,23 +2,23 @@ import Data from '../Asset/data/data';
 
 const iState = {
     list: Data,
-    loginData: [{ name: 'amit', password: '123456' }],
+    loginData: [{ name: 'user', password: '123456', email: 'abc@gmail.com' }],
 
 };
 
 const reducer = (state = iState, action) => {
     switch (action.type) {
         case "createUser":
-            const n = { "name": action.payload.name, "password": action.payload.password }
-            console.log([...state.loginData, n], n)
+            const n = { "name": action.payload.name, "password": action.payload.password, "email": action.payload.email }
+            // console.log([...state.loginData, n], n)
             return {
                 "loginData": [...state.loginData, n],
                 "list": state.list,
             }
-            break;
+
         case "searchData":
             let filteredData = ''
-            console.log('data', action.payload.searchInput)
+            // console.log('data', action.payload.searchInput)
             if (action.payload.searchInput !== '') {
                 filteredData = state.list.filter(value => {
                     return value.State

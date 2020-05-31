@@ -5,8 +5,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { Row, Col, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import './Carts.css';
-import Header from '../Header/Header';
+import './Home.css';
+// import Header from '../Header/Header';
+import Data from '../../Asset/data/data';
 
 
 class Home extends React.Component {
@@ -62,22 +63,25 @@ class Home extends React.Component {
         return (
             <div >
                 <ReactTable
-                    // data={this.props.cartData ? this.props.cartData : []}
+                    data={Data ? Data : []}
                     columns={[
                         {
-                            Header: () => <div className="ID"></div>,
+                            Header: () => <div className="ID">State/UT</div>,
                             id: 'row',
-                            className: 'ID TextCenter',
+                            className: 'State TextCenter',
                             headerClassName: 'ID TextCenter',
                             Cell: (row) => {
                                 return (
                                     <div className='text-center pt-3'>
-                                        <Checkbox
+                                        {row.row._original.State !== "Total" ?
+                                            row.row._original.State
+                                            : null}
+                                        {/* <Checkbox
                                             checked={this.state.selected[row.row._original.id] === true}
                                             onChange={() => {
                                                 this.toggleRow(row.row._original);
                                             }}
-                                        />
+                                        /> */}
                                     </div>
                                 )
                             },
@@ -88,14 +92,15 @@ class Home extends React.Component {
                         },
                         {
                             Header: () => <div className="Header" style={{ textAlign: 'initial' }} >Confirmed</div>,
-                            // accessor: 'pro_name',
+                            accessor: 'Confirmed',
                             className: 'Name TextCenter',
                             headerClassName: 'Name TextCenter',
                             Cell: (row) => {
                                 return (
                                     <div >
-                                        <Row>
-                                        </Row>
+                                        {row.row._original.State !== "Total" ?
+                                            row.row._original.Confirmed
+                                            : null}
                                     </div>
                                 )
                             },
@@ -104,38 +109,51 @@ class Home extends React.Component {
                         },
                         {
                             Header: () => <div className="Header" >Active</div>,
-                            // accessor: 'price',
+                            accessor: 'Active',
                             foldable: false,
                             className: 'company TextCenter',
                             headerClassName: 'company TextCenter',
                             Cell: (row) => {
                                 return (
                                     <div className='text-center pt-4'>
-
+                                        {row.row._original.State !== "Total" ?
+                                            row.row._original.Active
+                                            : null}
                                     </div>
                                 )
                             },
                         },
                         {
                             Header: () => <div className="Header" >Recovered</div>,
-                            accessor: 'company',
+                            accessor: 'Recovered',
                             foldable: true,
                             className: 'company TextCenter',
                             headerClassName: 'company TextCenter',
                             Cell: (row) => {
                                 return (
                                     <div className='text-center pt-4'>
-
+                                        {row.row._original.State !== "Total" ?
+                                            row.row._original.Recovered
+                                            : null}
                                     </div>
                                 )
                             },
                         },
                         {
                             Header: () => <div className="Header" >Deceased</div>,
-                            accessor: 'company',
+                            accessor: 'Deaths',
                             foldable: true,
                             className: 'company TextCenter',
                             headerClassName: 'company TextCenter',
+                            Cell: (row) => {
+                                return (
+                                    <div className='text-center pt-4'>
+                                        {row.row._original.State !== "Total" ?
+                                            row.row._original.Deaths
+                                            : null}
+                                    </div>
+                                )
+                            },
 
                         },
                         {
@@ -143,18 +161,17 @@ class Home extends React.Component {
                                 position: 'relative',
                                 height: '40px'
                             }}>
-                                <Col >
-                                    <span style={{ marginLeft: '-450px', position: 'relative' }}>Total</span>
-                                    <span style={{
-                                        position: 'relative',
-                                        marginLeft: '150px'
-                                    }}>$
-                                    </span>
-                                </Col>
+                                {/* Cell: (row) => {
+                                return (
+                                    <div className='text-center pt-4'>
+
+                                    </div>
+                                ) */}
+                            },
                             </div>
                         }
                     ]}
-                    pageSize={this.props.cartData.length}
+                    pageSize={Data.length}
                     showPaginationBottom={false}
                 />
             </div >

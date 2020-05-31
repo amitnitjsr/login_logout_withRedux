@@ -33,18 +33,17 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = props => {
     const classes = useStyles();
-    const [checkSignup, setSignup] = useState(false);
-
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('')
     // const handleNavigation = () => {
     //     setSignup(!checkSignup);
     // };
-    // const handleTextChange = (event, name) => {
-    //     const value = event.target.value;
-    //     console.log(value);
-    //     if (name === "email") setEmail(value);
-    //     if (name === "password") setPassword(value);
-    //     if (name === "confirmPassword") setConfirmPassword(value);
-    // };
+    const handleTextChange = (event, name) => {
+        const value = event.target.value;
+        console.log(value);
+        if (name === "password") setPassword(value);
+        if (name === "name") setName(value);
+    };
 
 
 
@@ -53,6 +52,7 @@ const SignIn = props => {
             <div className={classes.paper}>
                 <form className={classes.form}>
                     <Row>
+
                         <Col>
                             <img src={signin} alt="no image" /><br /><br /><br />
                             <Link to='/signup'><span style={{ textDecoration: 'underline' }}>Create an account</span></Link>
@@ -63,6 +63,7 @@ const SignIn = props => {
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Your Name"
+                                onChange={(event) => handleTextChange(event, "name")}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -73,7 +74,9 @@ const SignIn = props => {
                             /><br /><br />
                             <TextField
                                 id="input-with-icon-textfield"
+                                type="password"
                                 placeholder="Password"
+                                onChange={(event) => handleTextChange(event, "password")}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">

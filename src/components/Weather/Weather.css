@@ -1,0 +1,40 @@
+.container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .container img {vertical-align: middle;}
+  
+  .container .content {
+    position: absolute;
+    bottom: 138px;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 50%;
+    padding: 20px;
+    /* margin-left: 0; */
+  }
+  
+  .container .content1 {
+    position: absolute;
+    bottom: 455px;
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 50%;
+    padding: 20px;
+    /* margin-left: 0; */
+  }
+
+  .btn {
+    color: #fff;
+    background-color: transparent;
+    border-color: none;
+}
+.btn:hover {
+  color: #fff;
+  background-color: transparent !important;
+  border-color: none;
+}

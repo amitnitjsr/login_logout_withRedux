@@ -32,31 +32,35 @@ const useStyles = makeStyles(theme => ({
 
 const Signup = props => {
     const classes = useStyles();
-    // const [checkSignup, setSignup] = useState(false);
+    const [term, setTerm] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setconfirmPassword] = useState('');
 
-    // const handleNavigation = () => {
-    //     setSignup(!checkSignup);
-    // };
-    // const handleTextChange = (event, name) => {
-    //     const value = event.target.value;
-    //     console.log(value);
-    //     if (name === "email") setEmail(value);
-    //     if (name === "password") setPassword(value);
-    //     if (name === "confirmPassword") setConfirmPassword(value);
-    // };
+    const termCondition = () => {
+        setTerm(!term);
+    };
+
+    const handleTextChange = (event, name) => {
+        const value = event.target.value;
+        if (name === "email") setEmail(value);
+        if (name === "password") setPassword(value);
+        if (name === "confirmPassword") setconfirmPassword(value);
+        if (name === "name") setName(value);
+    };
 
     return (
         <Container component="main" maxWidth="md">
             <div className={classes.paper}>
                 <form className={classes.form}>
                     <Row>
-
-
                         <Col>
                             <h1>Sign up</h1>
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Your Name"
+                                onChange={(event) => handleTextChange(event, "name")}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -68,6 +72,7 @@ const Signup = props => {
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Email"
+                                onChange={(event) => handleTextChange(event, "email")}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -79,6 +84,8 @@ const Signup = props => {
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Password"
+                                type="password"
+                                onChange={(event) => handleTextChange(event, "password")}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -90,18 +97,22 @@ const Signup = props => {
                             <TextField
                                 id="input-with-icon-textfield"
                                 placeholder="Repeat your password"
+                                type="password"
+                                onChange={(event) => handleTextChange(event, "confirmPassword")}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <i class="zmdi zmdi-lock"></i>
+                                            <i class="zmdi zmdi-lock" style={{ color: 'whitesmoke' }}></i>
                                         </InputAdornment>
                                     ),
                                 }}
                             /><br /><br />
                             <Checkbox
+                                checked={term}
+                                onChange={() => termCondition()}
                             /> I agree all statements in <span style={{ textDecoration: 'underline' }}>Term of services</span>
                             <br /><br />
-                            <Button style={{ backgroundColor: '#6384f9' }}>Register</Button>
+                            <Button style={{ backgroundColor: '#6384f9' }} disabled={!term}>Register</Button>
 
                         </Col>
                         <Col>

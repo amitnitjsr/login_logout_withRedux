@@ -61,19 +61,19 @@ function Weather() {
                         <span>FEEL LIKE 7 &#8451;</span>
                     </Col>
                     <Col>
-                        <i class='fas fa-cloud-rain'></i>&nbsp;<span>Rain</span><br />
+                        <i className='fas fa-cloud-rain'></i>&nbsp;<span>Rain</span><br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span>40%</span>
                     </Col>
                     <Col>
-                        <i class="fas fa-wind"></i>&nbsp;<span>Wind</span><br />
+                        <i className="fas fa-wind"></i>&nbsp;<span>Wind</span><br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span>40 km/h</span>
                     </Col>
                     <Col>
-                        <i class="zmdi zmdi-fire"></i>&nbsp;<span>Humidity</span><br />
+                        <i className="zmdi zmdi-fire"></i>&nbsp;<span>Humidity</span><br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span>5%</span>
                     </Col>
                     <Col>
-                        <i class="zmdi zmdi-sun"></i>&nbsp;<span>Sun</span><br />
+                        <i className="zmdi zmdi-sun"></i>&nbsp;<span>Sun</span><br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span>0 of 10</span>
                     </Col>
                 </Row>
